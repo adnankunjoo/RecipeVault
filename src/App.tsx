@@ -1,37 +1,31 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import Auth from "./pages/Auth";
-import Generate from "./pages/Generate";
-import Browse from "./pages/Browse";
-import RecipeDetail from "./pages/RecipeDetail";
-import Dashboard from "./pages/Dashboard";
-import NotFound from "./pages/NotFound";
+import Recipe from "./pages/Recipe";
+import AddRecipe from "./pages/AddRecipe";
 
-const queryClient = new QueryClient();
+function App() {
+  return (
+    <BrowserRouter>
+      <div className="min-h-screen flex flex-col">
+        
+        {/* Main Content */}
+        <div className="flex-1">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/recipe/:id" element={<Recipe />} />
+            <Route path="/add" element={<AddRecipe />} />
+          </Routes>
+        </div>
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/generate" element={<Generate />} />
-          <Route path="/browse" element={<Browse />} />
-          <Route path="/recipe/:id" element={<RecipeDetail />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+        {/* Footer */}
+        <footer className="w-full py-6 flex items-center justify-center border-t mt-10">
+          <p className="text-sm text-muted-foreground">
+            Crafted with ❤️ by <span className="font-medium text-foreground">Adnan</span>
+          </p>
+        </footer>
+      </div>
+    </BrowserRouter>
+  );
+}
 
-export default App;
+export default
